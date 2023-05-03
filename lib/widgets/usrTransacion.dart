@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './widgets/transaction_list.dart';
-import './widgets/newTransaction.dart';
-import '../model/transaction.dart';
+import 'transaction_list.dart';
+import 'newTransaction.dart';
+import '../../model/transaction.dart';
 
 class UserTrasction extends StatefulWidget {
   @override

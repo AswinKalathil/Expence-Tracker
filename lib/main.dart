@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:expence_tracker/usrTransacion.dart';
+import 'package:expence_tracker/widgets/usrTransacion.dart';
 import 'package:flutter/material.dart';
 
 void main() {
