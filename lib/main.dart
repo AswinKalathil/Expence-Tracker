@@ -68,10 +68,42 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Transaction> _usrTransactions = [
-    Transaction(id: 't1', title: 'Shoes', amount: 806, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Bag', amount: 506, date: DateTime.now()),
-    Transaction(id: 't1', title: 'Shoes', amount: 806, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Bag', amount: 506, date: DateTime.now()),
+    Transaction(
+      id: 't3',
+      title: 'Jacket',
+      amount: 1000,
+      date: DateTime.now().subtract(Duration(days: 6)),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Groceries',
+      amount: 250,
+      date: DateTime.now().subtract(Duration(days: 5)),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Gas',
+      amount: 2000,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Phone Bill',
+      amount: 1200,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't7',
+      title: 'Electricity Bill',
+      amount: 150,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't8',
+      title: 'Internet Bill',
+      amount: 500,
+      date: DateTime.now().subtract(Duration(days: 1)),
+    ),
   ];
 
   void startAddNewTransaction(BuildContext ctx) {
@@ -101,11 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Expences',
+          'Expenses',
           style: Theme.of(context).appBarTheme.textTheme.headline6,
         ),
         actions: <Widget>[
