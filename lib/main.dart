@@ -3,6 +3,7 @@
 import 'package:expence_tracker/widgets/newTransaction.dart';
 import 'package:expence_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import './widgets/chart.dart';
 import 'model/transaction.dart';
@@ -23,6 +24,8 @@ final primaryViolet = MaterialColor(
   },
 );
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
@@ -174,28 +177,75 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool _showChart = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Expenses',
-          style: Theme.of(context).appBarTheme.textTheme.headline6,
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add_rounded),
-            onPressed: (() => startAddNewTransaction(context)),
-          )
-        ],
+    final mediaQuery = MediaQuery.of(context);
+    final bool islandScape = mediaQuery.orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: Text(
+        'Expenses',
+        style: Theme.of(context).appBarTheme.textTheme.headline6,
       ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add_rounded),
+          onPressed: (() => startAddNewTransaction(context)),
+        )
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Chart(_recentTransaction),
-              TransactionList(_usrTransactions, _confirmDelete),
+              if (!islandScape)
+                Container(
+                    height: (mediaQuery.size.height -
+                            appBar.preferredSize.height -
+                            mediaQuery.padding.top) *
+                        .37,
+                    child: Chart(_recentTransaction)),
+              if (!islandScape)
+                Container(
+                    height: (mediaQuery.size.height -
+                            appBar.preferredSize.height -
+                            mediaQuery.padding.top) *
+                        .63,
+                    child: TransactionList(_usrTransactions, _confirmDelete)),
+              if (islandScape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Show Chart'),
+                    Switch(
+                      value: _showChart,
+                      onChanged: ((value) {
+                        setState(() {
+                          _showChart = value;
+                        });
+                      }),
+                    ),
+                  ],
+                ),
+              if (islandScape)
+                _showChart
+                    ? Container(
+                        height: (mediaQuery.size.height -
+                                appBar.preferredSize.height -
+                                mediaQuery.padding.top) *
+                            .8,
+                        child: Chart(_recentTransaction))
+                    : Container(
+                        height: (mediaQuery.size.height -
+                                appBar.preferredSize.height -
+                                mediaQuery.padding.top) *
+                            .82,
+                        child:
+                            TransactionList(_usrTransactions, _confirmDelete)),
             ]),
       ),
       floatingActionButton: FloatingActionButton(
