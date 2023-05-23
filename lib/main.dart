@@ -3,6 +3,7 @@
 import 'package:expence_tracker/widgets/newTransaction.dart';
 import 'package:expence_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import './widgets/chart.dart';
 import 'model/transaction.dart';
 
@@ -35,12 +36,12 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+              headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
               ),
+              button: TextStyle(color: Colors.white)),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
                 ),
           )),
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -118,16 +120,57 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void _addNewTransaction(String txtitle, String strAmount) {
+  void _addNewTransaction(
+      String txtitle, String strAmount, DateTime ChoosenDate) {
     final Transaction newTx = Transaction(
       title: txtitle,
       amount: double.parse(strAmount),
-      date: DateTime.now(),
+      date: ChoosenDate,
       id: DateTime.now().toString(),
     );
 
     setState(() {
       _usrTransactions.add(newTx);
+    });
+  }
+
+  Future<void> _confirmDelete(String id) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Confirm Delete',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    _deleteTransaction(id);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'Confirm',
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ))
+            ],
+          );
+        });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _usrTransactions.removeWhere((tx) => tx.id == id);
     });
   }
 
@@ -152,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Chart(_recentTransaction),
-              TransactionList(_usrTransactions),
+              TransactionList(_usrTransactions, _confirmDelete),
             ]),
       ),
       floatingActionButton: FloatingActionButton(
