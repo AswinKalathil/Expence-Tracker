@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'Expense Tracker',
       theme: ThemeData(
           primarySwatch: primaryViolet,
-          accentColor: Colors.amber,
+          hintColor: Colors.amber,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
@@ -46,13 +46,19 @@ class MyApp extends StatelessWidget {
               ),
               button: TextStyle(color: Colors.white)),
           appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
+            toolbarTextStyle: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                ).bodyText2, titleTextStyle: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ).headline6,
           )),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
@@ -183,10 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final bool islandScape = mediaQuery.orientation == Orientation.landscape;
+  
     final appBar = AppBar(
       title: Text(
         'Expenses',
-        style: Theme.of(context).appBarTheme.textTheme.headline6,
+        style: Theme.of(context).appBarTheme.titleTextStyle,
       ),
       actions: <Widget>[
         IconButton(
