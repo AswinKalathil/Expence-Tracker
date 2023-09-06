@@ -30,7 +30,7 @@ class Chart extends StatelessWidget {
 
   double get totalSpending {
     return groupedTransactionValues.fold(0.0, (prevVal, element) {
-      return prevVal + element['amount'];
+      return prevVal + (element['amount'] as double);
     });
   }
 
@@ -58,7 +58,8 @@ class Chart extends StatelessWidget {
                         ),
                         Text(
                           '₹ ${totalSpending.toString()} ',
-                          style: TextStyle(fontSize:  constraints.maxHeight * .122),
+                          style:
+                              TextStyle(fontSize: constraints.maxHeight * .122),
                         )
                       ],
                     ),
@@ -72,8 +73,8 @@ class Chart extends StatelessWidget {
                         return Container(
                           height: constraints.maxHeight * .817,
                           child: ChartBar(
-                              data['day'],
-                              data['amount'],
+                              data['day'] as String,
+                              data['amount'] as double,
                               totalSpending == 0
                                   ? 0.0
                                   : ((data['amount'] as double) /

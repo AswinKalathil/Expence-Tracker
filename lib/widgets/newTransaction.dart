@@ -15,7 +15,7 @@ class Newtransaction extends StatefulWidget {
 class _NewtransactionState extends State<Newtransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  DateTime _selectedDate;
+  late DateTime _selectedDate = DateTime.now();
   void _presentDatePicker() {
     showDatePicker(
             context: context,
@@ -27,7 +27,7 @@ class _NewtransactionState extends State<Newtransaction> {
         return;
       }
       setState(() {
-        _selectedDate = pickedDate;
+        _selectedDate = pickedDate!;
       });
     });
   }
@@ -77,7 +77,7 @@ class _NewtransactionState extends State<Newtransaction> {
                         ? 'Today'
                         : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}'),
                   ),
-                TextButton(
+                  TextButton(
                       onPressed: _presentDatePicker,
                       child: Text(
                         'Choose Date',

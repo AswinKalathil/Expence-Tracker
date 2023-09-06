@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Tracker',
       theme: ThemeData(
+          
           primarySwatch: primaryViolet,
           hintColor: Colors.amber,
           fontFamily: 'Quicksand',
