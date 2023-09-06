@@ -1,16 +1,13 @@
-# expence_tracker
 
-A new Flutter project.
-
+Expense Tracker App
+-------------------
+An easy-to-use Flutter app for tracking your expenses. Add new expenses with a title and amount, and view the last week's expenses at the top.
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To run this app locally, you'll need to have Flutter and Dart installed. If you don't have them, you can download and install them from the official Flutter website: Flutter Installation Guide.
+Or Install usng the expenseTracker.apk
+Usage
+------
+Click the "Add" button to add a new expense.
+Enter the title and amount of the expense.
+The last week's expenses will be displayed at the top of the list.
