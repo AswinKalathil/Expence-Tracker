@@ -7,8 +7,7 @@ To run this app locally, you'll need to have Flutter and Dart installed. If you 
 Or Install usng the expenseTracker.apk
 
 ## Usage
-
-
 Click the "Add" button to add a new expense.
+![ssofPages](https://github.com/AswinKalathil/Expence-Tracker/assets/97769498/d2f14428-7793-47d6-835c-10cc28e706e3)
 Enter the title and amount of the expense.
 The last week's expenses will be displayed at the top of the list.
