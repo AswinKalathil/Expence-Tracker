@@ -1,5 +1,5 @@
 
-## Expense Tracker App
+# Expense Tracker App
 
 An easy-to-use Flutter app for tracking your expenses. Add new expenses with a title and amount, and view the last week's expenses at the top.
 ## Getting Started
